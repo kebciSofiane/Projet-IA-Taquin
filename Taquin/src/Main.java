@@ -25,8 +25,8 @@ public class Main {
         fGrid[2][0] = '7';
         fGrid[2][1] = '8';
         fGrid[2][2] = ' ';
-        Breadth_First_Search breadth_first_search = new Breadth_First_Search(grid,fGrid);
 
+        Breadth_First_Search breadth_first_search = new Breadth_First_Search(grid,fGrid);
         breadth_first_search.run_Breadth_Search();
 
 
