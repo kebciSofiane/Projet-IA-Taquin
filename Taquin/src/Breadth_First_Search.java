@@ -49,15 +49,14 @@ public class Breadth_First_Search {
                     }
 
 
-            System.out.println(emptyCaseX+" "+emptyCaseY);
-
-
             neighborCell(open, close, emptyCaseX, emptyCaseY-1, myGrid,emptyCaseX,emptyCaseY);
             neighborCell(open, close, emptyCaseX-1, emptyCaseY, myGrid,emptyCaseX,emptyCaseY);
             neighborCell(open, close, emptyCaseX, emptyCaseY+1, myGrid,emptyCaseX,emptyCaseY);
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGrid,emptyCaseX,emptyCaseY);
 
             close.add(myGrid);
+            System.out.println("State number "+close.toArray().length+" Treated");
+
         }
     }
     private void neighborCell(LinkedList<char[][]> open, LinkedList<char[][]> close, int x, int y, char[][] grid,int xb,int yb) {
