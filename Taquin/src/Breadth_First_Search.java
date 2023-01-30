@@ -5,11 +5,11 @@ public class Breadth_First_Search {
 
     LinkedList<char[][]> open  = new LinkedList<>();
     LinkedList<char[][]> close = new LinkedList<>();
-    private char[][] initialGrid;
-    private char[][] finalGrid;
+    private final char[][] initialGrid;
+    private final char[][] finalGrid;
 
-    private  int row;
-    private  int col;
+    private final int row;
+    private final int col;
 
 
 
@@ -67,30 +67,27 @@ public class Breadth_First_Search {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
             System.out.println(Arrays.deepToString(transitionalGrid));
-            if (!isIn(close, transitionalGrid) & !isIn(open,transitionalGrid) )
+            if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
                 open.addLast(transitionalGrid);
 
         }
     }
 
     private boolean isIn(LinkedList<char[][]> llist, char[][] grid){
-        for(int i = 0 ; i < llist.size(); i++){
-            if (equals(llist.get(i),grid)) return true;}
-        return false;
+        for (char[][] chars : llist) {
+            if (equals(chars, grid)) return false;
+        }
+        return true;
     }
 
     private  char[][] deepCopy(char[][] grid){
         char[][] newGrid = new char[row][col];
         for (int i=0; i<row; i++)
-            for (int j=0; j<row; j++)
-                newGrid[i][j] = grid[i][j];
+            System.arraycopy(grid[i], 0, newGrid[i], 0, row);
         return newGrid;
     }
     private boolean canBeAccessed(int i, int j){
-        if (i<row & i>-1 & j<col & j>-1)
-            return true;
-        else
-            return false;
+        return i < row & i > -1 & j < col & j > -1;
     }
 
     public boolean equals(char[][] o, char[][] o2){
