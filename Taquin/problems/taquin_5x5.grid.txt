@@ -1,0 +1,11 @@
+5
+abcde
+fghij
+klmno
+pqrst
+uvwx 
+klmno
+pqrst
+uvwx 
+abcde
+fghij

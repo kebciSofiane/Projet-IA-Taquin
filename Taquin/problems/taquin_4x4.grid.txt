@@ -1,0 +1,9 @@
+4
+abcd
+mno 
+efgh
+ijkl
+abcd
+efgh
+ijkl
+mno  
