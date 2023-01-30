@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class Breadth_First_Search {
+public class Breadth_First_Search{
 
     // TODO: 30/01/2023
     // Créer des classes pour les cases ?
