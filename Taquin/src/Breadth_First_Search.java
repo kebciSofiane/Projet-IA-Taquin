@@ -5,8 +5,6 @@ public class Breadth_First_Search{
 
     // TODO: 30/01/2023
     // Créer des classes pour les cases ?
-    // Résoudre le problème avec les lettres
-    //Lire les fichier que le profs a mit sur amétice
     LinkedList<char[][]> open  = new LinkedList<>();
     LinkedList<char[][]> close = new LinkedList<>();
     private final char[][] initialGrid;

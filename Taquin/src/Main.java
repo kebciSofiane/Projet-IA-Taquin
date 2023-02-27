@@ -7,7 +7,7 @@ public class Main {
 
         FileReader fileReader = new FileReader();
         ArrayList<char[][]> myGrids= fileReader.readFileData
-                ("Taquin/problems/taquinTest1.grid.txt");
+                ("Taquin/problems/taquin_2x4b.grid.txt");
 
         char[][] grid = myGrids.get(0);
         char[][] fGrid = myGrids.get(1);
@@ -19,10 +19,10 @@ public class Main {
 
 
 
-        Breadth_First_Search breadth_first_search = new Breadth_First_Search(grid,fGrid);
+       Breadth_First_Search breadth_first_search = new Breadth_First_Search(grid,fGrid);
         breadth_first_search.run_Breadth_Search();
 
-      /* Depth_First_Search depth_first_search = new Depth_First_Search(grid,fGrid);
+     /* Depth_First_Search depth_first_search = new Depth_First_Search(grid,fGrid);
         depth_first_search.run_Depth_Search();*/
 
 
