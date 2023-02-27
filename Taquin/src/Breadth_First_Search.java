@@ -26,7 +26,6 @@ public class Breadth_First_Search{
 
 
     public void run_Breadth_Search(){
-
         open.addLast(this.initialGrid);
         int emptyCaseX = -1;
         int emptyCaseY = -1;
@@ -40,8 +39,6 @@ public class Breadth_First_Search{
                 System.out.println("Final grid found with breadth_first_search: "+Arrays.deepToString(myGrid));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
-
-
                 break;
             }
 
@@ -69,24 +66,26 @@ public class Breadth_First_Search{
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid));
-            if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
+            if (!isIn(close, transitionalGrid) & !isIn(open, transitionalGrid)){
+                System.out.println(Arrays.deepToString(transitionalGrid));
                 open.addLast(transitionalGrid);
+            }
 
         }
     }
 
     private boolean isIn(LinkedList<char[][]> llist, char[][] grid){
         for (char[][] chars : llist) {
-            if (equals(chars, grid)) return false;
+            if (equals(chars, grid)) return true;
         }
-        return true;
+        return false;
     }
 
     private  char[][] deepCopy(char[][] grid){
         char[][] newGrid = new char[row][col];
         for (int i=0; i<row; i++)
-            System.arraycopy(grid[i], 0, newGrid[i], 0, row);
+            for (int j=0; j<col; j++)
+                newGrid[i][j]=grid[i][j];
         return newGrid;
     }
     private boolean canBeAccessed(int i, int j){
