@@ -8,12 +8,35 @@ public class Best_First_Search {
     PriorityQueue<State>open  = new PriorityQueue<>();
     PriorityQueue<State>close  = new PriorityQueue<>();
 
+    private int heuristic(char[][] grid){
+        return misplacement(grid);
+    }
+
     private final int row;
     private final int col;
 
 
+    private int[] findPosition(char character, char[][] grid){
+        for (int i=0; i<row; i++)
+            for (int j=0;j<col;j++)
+                if (grid[i][j] == character) return  new int[]{i,j};
 
-    public int misplacementHeuristic(char[][] grid){
+    return new int[]{0,0};
+    }
+
+    public  int manhattanDistanceHeuristic(char[][] grid){
+        int totalDistance=0;
+        for (int i=0; i<row; i++)
+            for (int j=0;j<col; j++){
+                int ib = findPosition(initialGrid[i][j],grid)[0];
+                int jb = findPosition(initialGrid[i][j],grid)[1];
+                totalDistance+= Math.abs(i-ib)+Math.abs(j-jb);
+            }
+
+        return totalDistance;
+    }
+
+    public int misplacement(char[][] grid){
         int nbr=0;
         for (int i=0; i<row; i++)
             for (int j=0;j<col;j++)
@@ -24,7 +47,6 @@ public class Best_First_Search {
     }
 
 
-
     public Best_First_Search(char[][] initialGrid, char[][] finalGrid) {
         this.initialGrid = initialGrid;
         this.finalGrid = finalGrid;
@@ -33,7 +55,7 @@ public class Best_First_Search {
     }
     public void run_Best_First_Search(){
 
-        open.add(new State(initialGrid, misplacementHeuristic(initialGrid)));
+        open.add(new State(initialGrid,heuristic(initialGrid)));
         int emptyCaseX = -1;
         int emptyCaseY = -1;
 
@@ -83,9 +105,9 @@ public class Best_First_Search {
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid));
+            System.out.println(Arrays.deepToString(transitionalGrid)+" Wrong : "+heuristic(transitionalGrid));
             if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
-                open.add(new State(transitionalGrid,misplacementHeuristic(transitionalGrid)));
+                open.add(new State(transitionalGrid,heuristic(transitionalGrid)));
         }
     }
 
