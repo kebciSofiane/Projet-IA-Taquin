@@ -24,7 +24,7 @@ public class Depth_First_Search {
     }
 
 
-    public void run_Breadth_Search(){
+    public void run_Depth_First_Search(){
 
         open.addFirst(this.initialGrid);
         int emptyCaseX = -1;
@@ -36,7 +36,7 @@ public class Depth_First_Search {
             char[][] myGrid = open.poll();
 
             if (equals(myGrid,finalGrid)){
-                System.out.println("Final grid found with breadth_first_search: "+ Arrays.deepToString(myGrid));
+                System.out.println("Final grid found with Depth_First_Search: "+ Arrays.deepToString(myGrid));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
 
