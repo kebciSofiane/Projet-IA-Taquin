@@ -9,7 +9,7 @@ public class Best_First_Search {
     PriorityQueue<State>close  = new PriorityQueue<>();
 
     private int heuristic(char[][] grid){
-        return misplacement(grid);
+        return linearConflict(grid);
     }
 
     private final int row;
@@ -19,8 +19,7 @@ public class Best_First_Search {
     private int[] findPosition(char character, char[][] grid){
         for (int i=0; i<row; i++)
             for (int j=0;j<col;j++)
-                if (grid[i][j] == character) return  new int[]{i,j};
-
+                if (grid[i][j] == character) return new int[]{i,j};
     return new int[]{0,0};
     }
 
@@ -28,11 +27,25 @@ public class Best_First_Search {
         int totalDistance=0;
         for (int i=0; i<row; i++)
             for (int j=0;j<col; j++){
-                int ib = findPosition(initialGrid[i][j],grid)[0];
-                int jb = findPosition(initialGrid[i][j],grid)[1];
+                int ib = findPosition(finalGrid[i][j],grid)[0];
+                int jb = findPosition(finalGrid[i][j],grid)[1];
                 totalDistance+= Math.abs(i-ib)+Math.abs(j-jb);
             }
 
+        return totalDistance;
+    }
+
+    public  int linearConflict(char[][] grid){
+        int totalDistance=0;
+        for (int i=0; i<row; i++)
+            for (int j=0;j<col; j++){
+                int ib = findPosition(finalGrid[i][j],grid)[0];
+                int jb = findPosition(finalGrid[i][j],grid)[1];
+                totalDistance+= Math.sqrt(
+                        Math.pow((i-ib),2)+
+                        Math.pow((j-jb),2)
+                );
+            }
         return totalDistance;
     }
 
