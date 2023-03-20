@@ -24,7 +24,8 @@ public class Depth_First_Search {
     }
 
 
-    public void run_Depth_Search(){
+    public void run_Depth_First_Search(){
+
         open.addFirst(this.initialGrid);
         int emptyCaseX = -1;
         int emptyCaseY = -1;
@@ -35,7 +36,7 @@ public class Depth_First_Search {
             char[][] myGrid = open.poll();
 
             if (equals(myGrid,finalGrid)){
-                System.out.println("Final grid found with depth_first_search: "+ Arrays.deepToString(myGrid));
+                System.out.println("Final grid found with Depth_First_Search: "+ Arrays.deepToString(myGrid));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
 
@@ -68,7 +69,7 @@ public class Depth_First_Search {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
             System.out.println(Arrays.deepToString(transitionalGrid));
-            if (!isIn(close, transitionalGrid) & !isIn(open, transitionalGrid))
+            if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
                 open.addFirst(transitionalGrid);
 
         }
@@ -76,16 +77,15 @@ public class Depth_First_Search {
 
     private boolean isIn(LinkedList<char[][]> llist, char[][] grid){
         for (char[][] chars : llist) {
-            if (equals(chars, grid)) return true;
+            if (equals(chars, grid)) return false;
         }
-        return false;
+        return true;
     }
 
     private  char[][] deepCopy(char[][] grid){
         char[][] newGrid = new char[row][col];
         for (int i=0; i<row; i++)
-            for (int j=0; j<col; j++)
-                newGrid[i][j]=grid[i][j];
+            System.arraycopy(grid[i], 0, newGrid[i], 0, row);
         return newGrid;
     }
     private boolean canBeAccessed(int i, int j){
