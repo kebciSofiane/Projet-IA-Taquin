@@ -16,8 +16,8 @@ public class Grid extends JFrame {
                 ("Taquin/problems/taquin_3x3.grid.txt");
         char[][] initialGrid = myGrids.get(0);
 
-        for ( int x = 0; x < 3; x += 1 )
-            for ( int y = 0; y < 3; y += 1 ) {
+        for ( int x = 0; x < initialGrid.length; x += 1 )
+            for ( int y = 0; y < initialGrid[0].length; y += 1 ) {
                 g.drawRect(x*30+100, y*30+100, 30, 30);
                 g.drawString(String.valueOf(initialGrid[y][x]),x*30+100, y*30+130);
             }
