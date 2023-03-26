@@ -34,7 +34,6 @@ public class FileReader {
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-
                 if (data.length() !=0)
                     if ( line<numberOfraws){
                         for (int i=0; i<data.length(); i++)

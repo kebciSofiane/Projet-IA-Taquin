@@ -24,6 +24,7 @@ public class Breadth_First_Search{
     }
 
 
+
     public void run_Breadth_Search(){
 
         open.addLast(this.initialGrid);
@@ -100,4 +101,12 @@ public class Breadth_First_Search{
         return true;
     }
 
+
+    public void setOpen() {
+        this.open = new LinkedList<>();
+    }
+
+    public void setClose() {
+        this.close = new LinkedList<>();
+    }
 }

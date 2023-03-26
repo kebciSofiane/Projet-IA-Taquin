@@ -8,13 +8,30 @@ public class Best_First_Search {
     PriorityQueue<State>open  = new PriorityQueue<>();
     PriorityQueue<State>close  = new PriorityQueue<>();
 
-    private int heuristic(char[][] grid){
-        return linearConflict(grid);
-    }
-
     private final int row;
     private final int col;
 
+
+    private String heuristicNumber;
+
+    public Best_First_Search(char[][] initialGrid, char[][] finalGrid) {
+        this.initialGrid = initialGrid;
+        this.finalGrid = finalGrid;
+        this.row = initialGrid.length;
+        this.col= initialGrid[0].length;
+    }
+
+
+
+
+    private int heuristic(char[][] grid, String heuristic){
+        switch (heuristic){
+            case "1": return misplacement(grid);
+            case "2": return linearConflict(grid);
+            case "3": return  manhattanDistance(grid);
+        }
+        return 0;
+    }
 
     private int[] findPosition(char character, char[][] grid){
         for (int i=0; i<row; i++)
@@ -23,7 +40,7 @@ public class Best_First_Search {
     return new int[]{0,0};
     }
 
-    public  int manhattanDistanceHeuristic(char[][] grid){
+    public  int manhattanDistance(char[][] grid){
         int totalDistance=0;
         for (int i=0; i<row; i++)
             for (int j=0;j<col; j++){
@@ -60,15 +77,10 @@ public class Best_First_Search {
     }
 
 
-    public Best_First_Search(char[][] initialGrid, char[][] finalGrid) {
-        this.initialGrid = initialGrid;
-        this.finalGrid = finalGrid;
-        this.row = initialGrid.length;
-        this.col= initialGrid[0].length;
-    }
+
     public void run_Best_First_Search(){
 
-        open.add(new State(initialGrid,heuristic(initialGrid)));
+        open.add(new State(initialGrid,heuristic(initialGrid, heuristicNumber)));
         int emptyCaseX = -1;
         int emptyCaseY = -1;
 
@@ -118,9 +130,9 @@ public class Best_First_Search {
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid)+" Wrong : "+heuristic(transitionalGrid));
+            System.out.println(Arrays.deepToString(transitionalGrid)+" Heuristic value : "+heuristic(transitionalGrid, heuristicNumber));
             if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
-                open.add(new State(transitionalGrid,heuristic(transitionalGrid)));
+                open.add(new State(transitionalGrid,heuristic(transitionalGrid, heuristicNumber)));
         }
     }
 
@@ -140,4 +152,20 @@ public class Best_First_Search {
     private boolean canBeAccessed(int i, int j){
         return i < row & i > -1 & j < col & j > -1;
     }
+
+
+
+
+
+    public void setOpen() {
+        this.open = new PriorityQueue<>();
+    }
+
+    public void setClose() {
+        this.close = new PriorityQueue<>();
+    }
+    public void setHeuristicNumber(String heuristicNumber) {
+        this.heuristicNumber = heuristicNumber;
+    }
+
 }

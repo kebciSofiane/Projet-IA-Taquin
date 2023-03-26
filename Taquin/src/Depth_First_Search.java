@@ -100,4 +100,13 @@ public class Depth_First_Search {
         return true;
     }
 
+
+    public void setOpen() {
+        this.open = new LinkedList<>();
+    }
+
+    public void setClose() {
+        this.close = new LinkedList<>();
+    }
+
 }
