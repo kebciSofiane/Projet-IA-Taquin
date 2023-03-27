@@ -28,7 +28,9 @@ public class Best_First_Search {
         switch (heuristic){
             case "1": return misplacement(grid);
             case "2": return linearConflict(grid);
-            case "3": return  manhattanDistance(grid);
+            case "3": return manhattanDistance(grid);
+            case "4": return misplacedCorners(grid);
+            case "5": return weightedTilesHeuristic(grid);
         }
         return 0;
     }
@@ -42,11 +44,14 @@ public class Best_First_Search {
 
     public  int manhattanDistance(char[][] grid){
         int totalDistance=0;
-        for (int i=0; i<row; i++)
-            for (int j=0;j<col; j++){
-                int ib = findPosition(finalGrid[i][j],grid)[0];
-                int jb = findPosition(finalGrid[i][j],grid)[1];
-                totalDistance+= Math.abs(i-ib)+Math.abs(j-jb);
+        for (int x=0; x<row; x++)
+            for (int y=0;y<col; y++){
+                if (grid[x][y] != ' ') {
+                    int xFinal = findPosition(finalGrid[x][y],grid)[0];
+                    int yFinal = findPosition(finalGrid[x][y],grid)[1];
+                    totalDistance+= Math.abs(x-xFinal)+Math.abs(y-yFinal);
+                }
+
             }
 
         return totalDistance;
@@ -56,12 +61,15 @@ public class Best_First_Search {
         int totalDistance=0;
         for (int i=0; i<row; i++)
             for (int j=0;j<col; j++){
-                int ib = findPosition(finalGrid[i][j],grid)[0];
-                int jb = findPosition(finalGrid[i][j],grid)[1];
-                totalDistance+= Math.sqrt(
-                        Math.pow((i-ib),2)+
-                        Math.pow((j-jb),2)
-                );
+                if (grid[i][j] != ' ') {
+                    int ib = findPosition(finalGrid[i][j],grid)[0];
+                    int jb = findPosition(finalGrid[i][j],grid)[1];
+                    totalDistance+= Math.sqrt(
+                            Math.pow((i-ib),2)+
+                                    Math.pow((j-jb),2)
+                    );
+                }
+
             }
         return totalDistance;
     }
@@ -70,11 +78,51 @@ public class Best_First_Search {
         int nbr=0;
         for (int i=0; i<row; i++)
             for (int j=0;j<col;j++)
-                if (grid[i][j] != finalGrid[i][j])
+                if ( grid[i][j]!=' ' && grid[i][j] != finalGrid[i][j])
                     nbr++;
 
         return  nbr;
     }
+
+    public int weightedTilesHeuristic(char[][] board) {
+        int n = board.length;
+        int m = board[0].length;
+        int count = 0;
+
+        int[][] weights = {
+                {3, 2, 2, 3},
+                {2, 1, 1, 2},
+                {2, 1, 1, 2},
+                {3, 2, 2, 3}
+        };
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] != ' ' && board[i][j] != finalGrid[i][j]) {
+                    count += weights[i][j];
+                }
+            }
+        }
+        return count;
+    }
+
+    public int misplacedCorners(char[][] grid) {
+        int misplacedCorners = 0;
+        if (grid[0][0] != finalGrid[0][0]) {
+            misplacedCorners++;
+        }
+        if (grid[0][grid.length - 1] != finalGrid[0][finalGrid.length - 1]) {
+            misplacedCorners++;
+        }
+        if (grid[grid.length - 1][0] != finalGrid[finalGrid.length - 1][0]) {
+            misplacedCorners++;
+        }
+        if (grid[grid.length - 1][grid.length - 1] != finalGrid[finalGrid.length - 1][finalGrid.length - 1]) {
+            misplacedCorners++;
+        }
+        return misplacedCorners;
+    }
+
 
 
 
@@ -138,7 +186,7 @@ public class Best_First_Search {
 
     private boolean isIn(PriorityQueue<State>  stateList, char[][] grid){
         for (State state : stateList) {
-            if (equals(state.getGrid(), grid)) return false;// vérifie dans les autre classe le false
+            if (equals(state.getGrid(), grid)) return false;
         }
         return true;
     }
@@ -146,7 +194,8 @@ public class Best_First_Search {
     private  char[][] deepCopy(char[][] grid){
         char[][] newGrid = new char[row][col];
         for (int i=0; i<row; i++)
-            System.arraycopy(grid[i], 0, newGrid[i], 0, row);
+            for (int j=0; j<col; j++)
+                newGrid[i][j]= grid[i][j];
         return newGrid;
     }
     private boolean canBeAccessed(int i, int j){

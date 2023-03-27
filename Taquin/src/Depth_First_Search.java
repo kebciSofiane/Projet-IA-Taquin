@@ -85,7 +85,8 @@ public class Depth_First_Search {
     private  char[][] deepCopy(char[][] grid){
         char[][] newGrid = new char[row][col];
         for (int i=0; i<row; i++)
-            System.arraycopy(grid[i], 0, newGrid[i], 0, row);
+            for (int j=0; j<col; j++)
+                newGrid[i][j]= grid[i][j];
         return newGrid;
     }
     private boolean canBeAccessed(int i, int j){
