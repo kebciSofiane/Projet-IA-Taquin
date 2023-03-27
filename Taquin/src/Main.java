@@ -40,16 +40,18 @@ public class Main {
 
             } while (!rep.equals("1") && !rep.equals("2") && !rep.equals("3") && !rep.equals("00"));
 
+            Boolean found = null;
             switch (rep) {
                 case "1":
                     breadth_first_search.setOpen();
                     breadth_first_search.setClose();
-                    breadth_first_search.run_Breadth_Search();
+                     found =breadth_first_search.run_Breadth_Search();
+
                     break;
                 case "2":
                     depth_first_search.setOpen();
                     depth_first_search.setClose();
-                    depth_first_search.run_Depth_First_Search();
+                    found =depth_first_search.run_Depth_First_Search();
                     break;
                 case "3":
 
@@ -68,10 +70,12 @@ public class Main {
                     bestFirstSearch.setHeuristicNumber(heuristic);
                     bestFirstSearch.setClose();
                     bestFirstSearch.setOpen();
-                    bestFirstSearch.run_Best_First_Search();
+                    found =bestFirstSearch.run_Best_First_Search();
                     break;
 
             }
+            if (found) System.out.println("---Result found---");
+            else System.out.println("---Can't find result---");
             System.out.println();
         } while (!rep.equals("00"));
     }
