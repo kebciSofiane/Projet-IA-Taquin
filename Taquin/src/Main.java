@@ -1,16 +1,19 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+   FileReader fileReader = new FileReader();
 
-        FileReader fileReader = new FileReader();
         Scanner scanner = new Scanner(System.in);
 
+
         ArrayList<char[][]> myGrids = fileReader.readFileData
-                ("Taquin/problems/taquin_4x4g.grid.txt");
+                ("Taquin/problems/taquin_3x4b.grid.txt");
+
 
         char[][] initialGrid = myGrids.get(0);
         char[][] finalGrid = myGrids.get(1);

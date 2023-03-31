@@ -6,56 +6,44 @@ import java.util.Scanner;
 public class FileReader {
 
 
-    public ArrayList<char[][]> readFileData(String fileName){
-        ArrayList<char[][]> meyGrids = new ArrayList<>();
-        try {
-            File myObj = new File(fileName);
-            Scanner myReader = new Scanner(myObj);
+    public ArrayList<char[][]> readFileData(String fileName) throws FileNotFoundException {
+        ArrayList<char[][]> myGrids = new ArrayList<>();
+        ArrayList<String> fileContent = new ArrayList<>();
 
-            int line =1;
-
-            int fillRawFinalGrid=0;
-            int fillRawInitialGrid=1;
-
-            int numberOfraws = Integer.parseInt(myReader.nextLine());
-            int numberOfcols =0;
-
-            String firstRaw="";
-
-            if (myReader.hasNextLine()) {
-                firstRaw = myReader.nextLine();
-                numberOfcols=firstRaw.length();
-            }
-            char[][] initialGrid = new char[numberOfraws][numberOfcols];
-            char[][] finalGrid = new char[numberOfraws][numberOfcols];
-
-            for (int i=0; i<firstRaw.length(); i++)
-                initialGrid[0][i] =  firstRaw.charAt(i);
-
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                if (data.length() !=0)
-                    if ( line<numberOfraws){
-                        for (int i=0; i<data.length(); i++)
-                            initialGrid[fillRawInitialGrid][i] =  data.charAt(i);
-                        fillRawInitialGrid++;}
-
-                    else {
-                        for (int i=0; i<data.length(); i++)
-                            finalGrid[fillRawFinalGrid][i] =  data.charAt(i);
-                        fillRawFinalGrid++;
-                    }
-                line++;
-            }
-            myReader.close();
-            meyGrids.add(initialGrid);
-            meyGrids.add(finalGrid);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        File myObj = new File(fileName);
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String line =myReader.nextLine();
+            if ( !line.equals(""))
+                fileContent.add(line);
         }
-        return meyGrids;
+
+
+
+        int numberOfraws= Integer.parseInt(fileContent.get(0));
+        int numberOfcols=0;
+
+        for (int i=1; i<fileContent.size();i++)
+            if (fileContent.get(i).length() > numberOfcols)
+                numberOfcols = fileContent.get(i).length();
+        fileContent.remove(0);
+
+        char[][] initialGrid = new char[numberOfraws][numberOfcols];
+        char[][] finalGrid = new char[numberOfraws][numberOfcols];
+
+        for (int i=0; i<fileContent.size();i++){
+            String line = fileContent.get(i);
+            if (i<numberOfraws)
+                for (int j=0; j<line.length();j++)
+                    initialGrid[i][j]=line.charAt(j);
+            else
+                for (int j=0; j<line.length();j++)
+                    finalGrid[i-numberOfraws][j]=line.charAt(j);
+        }
+        myGrids.add(initialGrid);
+        myGrids.add(finalGrid);
+
+        return myGrids;
     }
 
 }
