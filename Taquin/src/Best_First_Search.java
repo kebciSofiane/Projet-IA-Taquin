@@ -153,6 +153,7 @@ public class Best_First_Search {
             State myGridState = open.poll();
 
             if (equals(myGridState.getGrid(),finalGrid)){
+                System.out.println();
                 System.out.println("Final grid found with Best_First_Search: "+ Arrays.deepToString(myGridState.getGrid()));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
@@ -173,8 +174,11 @@ public class Best_First_Search {
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGridState.getGrid(),emptyCaseX,emptyCaseY);
 
             close.add(myGridState);
-            //System.out.println("State number "+close.toArray().length+" Treated");
+            System.out.println("State number "+close.toArray().length+" Treated");
         }
+        System.out.println();
+        System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
+        System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
         return false;
 
     }

@@ -37,10 +37,10 @@ public class Breadth_First_Search{
             char[][] myGrid = open.poll();
 
             if (equals(myGrid,finalGrid)){
+                System.out.println();
                 System.out.println("Final grid found with breadth_first_search: "+Arrays.deepToString(myGrid));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
-
                 return true;
             }
 
@@ -58,9 +58,12 @@ public class Breadth_First_Search{
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGrid,emptyCaseX,emptyCaseY);
 
             close.add(myGrid);
-            //System.out.println("State number "+close.toArray().length+" Treated");
+            System.out.println("State number "+close.toArray().length+" Treated");
 
         }
+        System.out.println();
+        System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
+        System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
         return false;
     }
     private void neighborCell(LinkedList<char[][]> open, LinkedList<char[][]> close, int x, int y, char[][] grid,int xb,int yb) {

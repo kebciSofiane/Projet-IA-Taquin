@@ -8,30 +8,32 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         FileReader fileReader = new FileReader();
         ArrayList<String> fileNames = fileReader.findFilesName();
-
         Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.println();
 
 
         int rep;
         String heuristic;
+        boolean ResultFound = false;
 
         do {
-            ArrayList<Integer> possibleAnswers;
+            ArrayList<Integer> validValuesSearchMethod;
             int cmt=0;
-            ArrayList<Integer> possibleAnswersForNames= new ArrayList<>();
+            ArrayList<Integer> validValuesForNames= new ArrayList<>();
 
 
             do {
                 System.out.println("Step 1 : Choose a file !");
                 for (String fileName : fileNames){
                     System.out.println(cmt+"-"+fileName);
-                possibleAnswersForNames.add(cmt);
+                validValuesForNames.add(cmt);
                 cmt++;
                 }
-                System.out.println("3-Exit");
+                System.out.print("Your choice :");
                 rep = Integer.parseInt(scanner.nextLine());
                 cmt=0;
-            } while (!possibleAnswersForNames.contains(rep));
+            } while (!validValuesForNames.contains(rep));
 
 
             ArrayList<char[][]> myGrids = fileReader.readFileData
@@ -53,48 +55,51 @@ public class Main {
 
 
             do {
-                System.out.println("Choose an option !");
+                System.out.println("Step 2 : Choose a search method !");
                 System.out.println("1-Breadth first search");
                 System.out.println("2-Depth first search");
                 System.out.println("3-Best first search");
-                System.out.println("00-Exit");
+                System.out.println(fileNames.size()+"-Exit");
 
+                System.out.print("Your choice :");
                 rep = Integer.parseInt(scanner.nextLine());
-                possibleAnswers= new ArrayList<>(Arrays.asList(1,2,3,0));
-            } while (!possibleAnswers.contains(rep));
+                validValuesSearchMethod= new ArrayList<>(Arrays.asList(1,2,3,fileNames.size()));
+            } while (!validValuesSearchMethod.contains(rep));
 
             switch (rep) {
                 case 1:
                     breadth_first_search.setOpen();
                     breadth_first_search.setClose();
-                    breadth_first_search.run_Breadth_Search();
+                    ResultFound=breadth_first_search.run_Breadth_Search();
                     break;
                 case 2:
                     depth_first_search.setOpen();
                     depth_first_search.setClose();
-                    depth_first_search.run_Depth_First_Search();
+                    ResultFound=depth_first_search.run_Depth_First_Search();
                     break;
                 case 3:
-
-                    List<String> validValues = Arrays.asList("1", "2", "3", "4", "5");
+                    List<String> validValuesHeuristic = Arrays.asList("1", "2", "3", "4", "5");
                     do {
-                        System.out.println("Choose an heuristic !");
+                        System.out.println("Step 3 : Choose an heuristic !");
                         System.out.println("1-misplacement heuristic");
                         System.out.println("2-euclideanDistance heuristic");
                         System.out.println("3-manhattanDistance heuristic");
                         System.out.println("4-misplacedCorners heuristic");
                         System.out.println("5-weightedTiles heuristic ");
+                        System.out.print("Your choice :");
                         heuristic = scanner.nextLine();
-                    } while (!validValues.contains(heuristic));
+                    } while (!validValuesHeuristic.contains(heuristic));
 
 
                     bestFirstSearch.setHeuristicNumber(heuristic);
                     bestFirstSearch.setClose();
                     bestFirstSearch.setOpen();
-                    bestFirstSearch.run_Best_First_Search();
+                    ResultFound =bestFirstSearch.run_Best_First_Search();
                     break;
 
             }
+            if (ResultFound) System.out.println("---Result ResultFound---");
+            else System.out.println("---Can't find result---");
             System.out.println();
         } while (rep!=0);
     }
