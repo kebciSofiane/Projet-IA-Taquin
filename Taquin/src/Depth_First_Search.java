@@ -3,10 +3,6 @@ import java.util.LinkedList;
 
 public class Depth_First_Search {
 
-    // TODO: 30/01/2023
-    // Créer des classes pour les cases ?
-    // Résoudre le problème avec les lettres
-    //Lire les fichier que le profs a mit sur amétice
     LinkedList<char[][]> open  = new LinkedList<>();
     LinkedList<char[][]> close = new LinkedList<>();
     private final char[][] initialGrid;
@@ -24,7 +20,7 @@ public class Depth_First_Search {
     }
 
 
-    public void run_Depth_First_Search(){
+    public Boolean run_Depth_First_Search(){
 
         open.addFirst(this.initialGrid);
         int emptyCaseX = -1;
@@ -40,8 +36,7 @@ public class Depth_First_Search {
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
 
-
-                break;
+                return true;
             }
 
             for (int i= 0; i< row; i++)
@@ -58,9 +53,10 @@ public class Depth_First_Search {
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGrid,emptyCaseX,emptyCaseY);
 
             close.add(myGrid);
-            System.out.println("State number "+close.toArray().length+" Treated");
+            //System.out.println("State number "+close.toArray().length+" Treated");
 
         }
+        return false;
     }
     private void neighborCell(LinkedList<char[][]> open, LinkedList<char[][]> close, int x, int y, char[][] grid,int xb,int yb) {
         char[][] transitionalGrid = deepCopy(grid);
@@ -68,7 +64,7 @@ public class Depth_First_Search {
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid));
+            //System.out.println(Arrays.deepToString(transitionalGrid));
             if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
                 open.addFirst(transitionalGrid);
 

@@ -25,7 +25,7 @@ public class Breadth_First_Search{
 
 
 
-    public void run_Breadth_Search(){
+    public Boolean run_Breadth_Search(){
 
         open.addLast(this.initialGrid);
         int emptyCaseX = -1;
@@ -41,8 +41,7 @@ public class Breadth_First_Search{
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
 
-
-                break;
+                return true;
             }
 
             for (int i= 0; i< row; i++)
@@ -59,9 +58,10 @@ public class Breadth_First_Search{
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGrid,emptyCaseX,emptyCaseY);
 
             close.add(myGrid);
-            System.out.println("State number "+close.toArray().length+" Treated");
+            //System.out.println("State number "+close.toArray().length+" Treated");
 
         }
+        return false;
     }
     private void neighborCell(LinkedList<char[][]> open, LinkedList<char[][]> close, int x, int y, char[][] grid,int xb,int yb) {
         char[][] transitionalGrid = deepCopy(grid);
@@ -69,7 +69,7 @@ public class Breadth_First_Search{
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid));
+            //System.out.println(Arrays.deepToString(transitionalGrid));
             if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
                 open.addLast(transitionalGrid);
 

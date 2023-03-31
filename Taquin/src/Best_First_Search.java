@@ -89,14 +89,29 @@ public class Best_First_Search {
         int m = board[0].length;
         int count = 0;
 
-        int[][] weights = {
-                {3, 2, 2, 3},
-                {2, 1, 1, 2},
-                {2, 1, 1, 2},
-                {3, 2, 2, 3}
-        };
+        int[][] weights = new int[n][m];
 
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++) {
+                weights[i][j]=1;
+                if (i > 0 && j< m-1){
+                    weights[i][j]=4;
+
+                }
+            }
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (i==0 || j==m-1 ||j==0 || i==n-1)
+                    weights[i][j]=5;
+
+        weights[0][0] = 6;
+        weights[n-1][m-1] = 6;
+        weights[0][m-1] = 6;
+        weights[n-1][0] = 6;
+
+            for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (board[i][j] != ' ' && board[i][j] != finalGrid[i][j]) {
                     count += weights[i][j];
@@ -126,7 +141,7 @@ public class Best_First_Search {
 
 
 
-    public void run_Best_First_Search(){
+    public Boolean run_Best_First_Search(){
 
         open.add(new State(initialGrid,heuristic(initialGrid, heuristicNumber)));
         int emptyCaseX = -1;
@@ -141,7 +156,7 @@ public class Best_First_Search {
                 System.out.println("Final grid found with Best_First_Search: "+ Arrays.deepToString(myGridState.getGrid()));
                 System.out.println("Number of treated states: "+ close.toArray().length+ " states" );
                 System.out.println("Number of waiting states: "+ open.toArray().length+ " states" );
-                break;
+                return true;
             }
 
             for (int i= 0; i< row; i++)
@@ -158,8 +173,9 @@ public class Best_First_Search {
             neighborCell(open, close, emptyCaseX+1, emptyCaseY, myGridState.getGrid(),emptyCaseX,emptyCaseY);
 
             close.add(myGridState);
-            System.out.println("State number "+close.toArray().length+" Treated");
+            //System.out.println("State number "+close.toArray().length+" Treated");
         }
+        return false;
 
     }
 
@@ -178,7 +194,7 @@ public class Best_First_Search {
         {
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
-            System.out.println(Arrays.deepToString(transitionalGrid)+" Heuristic value : "+heuristic(transitionalGrid, heuristicNumber));
+            //System.out.println(Arrays.deepToString(transitionalGrid)+" Heuristic value : "+heuristic(transitionalGrid, heuristicNumber));
             if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
                 open.add(new State(transitionalGrid,heuristic(transitionalGrid, heuristicNumber)));
         }
