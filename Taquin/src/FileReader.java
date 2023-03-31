@@ -45,5 +45,16 @@ public class FileReader {
 
         return myGrids;
     }
+    public ArrayList<String> findFilesName(){
+                File folder = new File("Taquin/problems");
+                File[] files = folder.listFiles();
+                ArrayList<String> names = new ArrayList<>();
 
+                for (File file : files) {
+                    if (file.isFile()) {
+                        names.add(file.getName());
+                    }
+                }
+                return  names;
+        }
 }
