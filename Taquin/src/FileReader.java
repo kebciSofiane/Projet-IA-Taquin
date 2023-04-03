@@ -18,8 +18,6 @@ public class FileReader {
                 fileContent.add(line);
         }
 
-
-
         int numberOfraws= Integer.parseInt(fileContent.get(0));
         int numberOfcols=0;
 
