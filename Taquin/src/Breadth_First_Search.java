@@ -73,13 +73,13 @@ public class Breadth_First_Search{
             transitionalGrid[xb][yb] = grid[x][y];
             transitionalGrid[x][y] = ' ';
             //System.out.println(Arrays.deepToString(transitionalGrid));
-            if (isIn(close, transitionalGrid) & isIn(open, transitionalGrid))
+            if (isNotIn(close, transitionalGrid) & isNotIn(open, transitionalGrid))
                 open.addLast(transitionalGrid);
 
         }
     }
 
-    private boolean isIn(LinkedList<char[][]> llist, char[][] grid){
+    private boolean isNotIn(LinkedList<char[][]> llist, char[][] grid){
         for (char[][] chars : llist) {
             if (equals(chars, grid)) return false;
         }

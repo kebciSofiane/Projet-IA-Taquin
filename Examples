@@ -1,0 +1,32 @@
+
+taquin_2x4b.grid.txt :
+
+  Breadth Search : 5538 Treated states
+  Depth search : 2333 Treated states
+  misplacement heuristic : 600 Treated states
+  euclideanDistance heuristic:181 Treated states
+  manhattanDistance heuristic:435 Treated states
+  misplacedCorners heuristic: 8171 Treated states
+  weightedTiles heuristic: 302 Treated states
+
+
+taquin_4x4g.grid.txt :
+
+Breadth Search : 6336 Treated states
+  Depth search :  >507758 Treated states
+  misplacement heuristic : 23 Treated states
+  euclideanDistance :40 Treated states
+  manhattanDistance :36 Treated states
+  misplacedCorners : 77291 Treated states
+  weightedTiles : 20 Treated states
+
+
+taquin_2x4c.grid.txt:
+
+Breadth Search : 6392 Treated states
+  Depth search :  4917 Treated states
+  misplacement heuristic : 1295 Treated states
+  euclideanDistance :470 Treated states
+  manhattanDistance :339 Treated states
+  misplacedCorners : 1823 Treated states
+  weightedTiles : 1611 Treated states
