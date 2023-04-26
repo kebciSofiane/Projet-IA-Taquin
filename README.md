@@ -1,8 +1,8 @@
 <h1 align="center" > Taquin </h1>
 <h3 align = "center" >College IA Projet</h3> 
 <div align = "center">
-  <img align = "center" src="Taquin/TaquinChoice.png" width = "50%"  height ="auto"></img>
-  <img align = "center" src="Taquin/TaquinResult.png" width = "50%"  height ="auto"></img>
+  <img align = "center" src="Taquin/TaquinChoice.png" width = "70%"  height ="auto"></img>
+  <img align = "center" src="Taquin/TaquinResult.png" width = "70%"  height ="auto"></img>
 
 
 <h2 align="center">Programming language :</h2>
